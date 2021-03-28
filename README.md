@@ -1,3 +1,5 @@
+Please view  SQUADSTACK.docx  for analysis and detailed explanation
+ 
 # STEPS TO RUN 
 
 ## 1.	Install Postgresql server and create database of name - parking. (can have your custom name)
