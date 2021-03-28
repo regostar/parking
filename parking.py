@@ -13,4 +13,5 @@ with open('input.txt', 'r') as ip:
 
 # Parse and execute each command
 for line in lines:
-    parse_command(line)
+    if line and line != '\n':
+        parse_command(line)

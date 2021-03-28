@@ -72,7 +72,8 @@ class ParkedVehicles(Base):
         try:
             if ParkedVehicles.__filled == ParkedVehicles.__max_slots:
                 # cannot accomodate more cars
-                print("Cannot accomodate more users")
+                print("Cannot accomodate more vehicles")
+                return
             ParkedVehicles.__filled += 1
             
             # get closest vacant slot
