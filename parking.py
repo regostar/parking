@@ -5,3 +5,5 @@ from base import Session, engine, Base
 Base.metadata.create_all(engine)
 
 # read input file
+with open('input.txt') as ip:
+    print(ip.readline())

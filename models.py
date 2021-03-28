@@ -13,8 +13,8 @@ class ParkedVehicles(Base):
     vacant = Column(Boolean, unique=False, default=True)
     
     # Class variables :- 
-    max_slots = 0
-    filled = 0
+    __max_slots = 0
+    __filled = 0
 
     # Database session
     session = Session()
@@ -25,6 +25,15 @@ class ParkedVehicles(Base):
         # should not be repeated since it's pk
         self.vehicle_registration_no = vehicle_reg_no
         self.vacant = vacant
+
+
+    @staticmethod
+    def create_parking_lot(max_slots: int):
+        __max_slots = max_slots
+        __filled = 0
+        
+        # Create empty records with slot numbers from 1 to max_slots
+        pass
 
 
     @staticmethod
@@ -57,7 +66,7 @@ class ParkedVehicles(Base):
         return 4
     
     @staticmethod
-    def exit(slot_no: int) -> str:
+    def leave(slot_no: int) -> str:
         """[When car exits the parking, the input is only the slot number.
         ]
 
