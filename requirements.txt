@@ -13,3 +13,6 @@ mccabe==0.6.1
 pylint==2.7.2
 toml==0.10.2
 wrapt==1.12.1
+
+# Environment variables :-
+envparse==0.2.0

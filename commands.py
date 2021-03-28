@@ -4,11 +4,14 @@ from typing import List
 from models import ParkedVehicles
 from base import Session, engine, Base
 
-def parse_command(text: str):
-    """[summary]
+
+def parse_command(text: str) -> None:
+    """[This function is used to Parse the string, 
+        extract the command and the arguments
+        and call the corresponding command function.]
 
     Args:
-        text (str): [description]
+        text (str): [The line we received from the input file which has to be parsed and run]
     """
     command_list = {
         'create_parking_lot': ParkedVehicles.create_parking_lot,
@@ -43,15 +46,16 @@ def parse_command(text: str):
 
 
 
-def get_non_empty_arg(split_command_list: List, starting_index: int = 1) -> (int, int):
-    """[Return first non empty argument]
+def get_non_empty_arg(split_command_list: List, starting_index: int = 1) -> (str, int):
+    """[Return first non empty argument. Why we need this function is 
+        if the input command has more than 1 space separation]
 
     Args:
-        int ([type]): [description]
-        split_command_list (List, starting_index, optional): [description]. Defaults to 1)->(int.
+        starting_index ([int]): [starting_index to look from the list provided]
+        split_command_list (List, starting_index, optional): [command parsed by splitting based on a single space]
 
     Returns:
-        [tuple]: [description]
+        [tuple]: [Argument, last index seen ]
     """
 
     arg = None

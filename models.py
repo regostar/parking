@@ -40,7 +40,6 @@ class ParkedVehicles(Base):
         ParkedVehicles.__max_slots = max_slots
         ParkedVehicles.__filled = 0
         
-
         # Empty DB on a create_parking_lot
         ParkedVehicles.__s.query(ParkedVehicles).delete()
 
@@ -93,6 +92,7 @@ class ParkedVehicles(Base):
         except Exception as e:
             print("Error while marking entry of car with reg no :- ", registration_no, " driver age:- ", driver_age, " error :- ", str(e))
 
+
     @staticmethod
     def leave(slot_no: str) -> str:
         """[When car exits the parking, the input is only the slot number.
@@ -110,7 +110,6 @@ class ParkedVehicles(Base):
             
             if parking is None:
                 print(" Invalid slot number "+ slot_no)
-
             else:
                 # get the vehicle reg. no
                 reg_no = parking.vehicle_registration_no
@@ -130,6 +129,7 @@ class ParkedVehicles(Base):
                     print('the driver of the car was of age', age)
         except Exception as e:
             print("Leave command failed due to :- ", str(e) , " slot no :-", int(slot_no))
+
 
     @staticmethod
     def get_slot_no(vehicle_reg_no: str) -> int:
@@ -175,16 +175,17 @@ class ParkedVehicles(Base):
         except Exception as e:
             print("Error in getting all slots of driver error - ", str(e))
 
+
     @staticmethod
-    def get_all_slots_of_driver_age(age) -> List:
-        """[Return list of slot numbers occupied by cars of drivers of given age, 
-           empty list is returned if none are present]
+    def get_all_slots_of_driver_age(age: str) -> None:
+        """[Prints list of slot numbers occupied by cars of drivers of given age, 
+           null is printed if none are present]
 
         Args:
-            age ([type]): [description]
+            age ([str]): [Driver Age]
 
         Returns:
-            List: [description]
+            None
         """
         try:
             all_slots = ParkedVehicles.__s.query(ParkedVehicles).filter(ParkedVehicles.driver_age==int(age)).order_by('slot')
@@ -196,4 +197,5 @@ class ParkedVehicles(Base):
                 print(str_list)
         except Exception as e:
             print("Error in getting all slots of driver error - ", str(e))
+
 
