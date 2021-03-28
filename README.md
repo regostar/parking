@@ -42,3 +42,7 @@ Please change the port or host if you are using a different one.
 
 ## 6.	Simply run :- 
 >> python parking.py
+>> 
+
+## 7. To test run :- 
+>> pytest
