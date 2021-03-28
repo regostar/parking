@@ -1,9 +1,10 @@
 
+from typing import List
 
 from models import ParkedVehicles
 from base import Session, engine, Base
 
-def parse_command(text: str, ParkedVehicles: Base):
+def parse_command(text: str):
     """[summary]
 
     Args:
@@ -22,17 +23,45 @@ def parse_command(text: str, ParkedVehicles: Base):
         # assuming there is atleast a space separation between the commands and the args
         command = text_list[0]
 
-        arg = None
-        for param in text_list[1:]:
-            if param:
-                arg = param
-                break
-        if command.lower() not in command_list or not arg:
-            raise Exception("Invalid command - ", command, " and Argument - ", arg)
+        if command.lower() not in command_list:
+            raise Exception("Invalid command - ", command)
 
-        result = command_list[command.lower()](arg)
-        return result
-
+        # only park command has 2 arguments
+        if command.lower() == 'park':
+            # Park PB-01-TG-2341 driver_age 40
+            # get next non empty element in list
+            arg_reg_no, last_index = get_non_empty_arg(split_command_list=text_list, starting_index=1)
+            driver_age, last_index = get_non_empty_arg(split_command_list=text_list, starting_index=last_index+1)
+            arg_age, last_index = get_non_empty_arg(split_command_list=text_list, starting_index=last_index+1)
+            command_list[command.lower()](registration_no=arg_reg_no, driver_age=arg_age)
+        else:
+            arg, _ = get_non_empty_arg(split_command_list=text_list, starting_index=1)
+            command_list[command.lower()](arg)
 
     except Exception as e:
-        print("Error while parsing command :- ", str(e))
+        print("Error while parsing command :-  ", text, " error:- ", str(e))
+
+
+
+def get_non_empty_arg(split_command_list: List, starting_index: int = 1) -> (int, int):
+    """[Return first non empty argument]
+
+    Args:
+        int ([type]): [description]
+        split_command_list (List, starting_index, optional): [description]. Defaults to 1)->(int.
+
+    Returns:
+        [tuple]: [description]
+    """
+
+    arg = None
+    index = starting_index
+    for param in split_command_list[starting_index:]:
+        if param:
+            arg = param
+            break
+    return arg, index
+
+
+    
+
