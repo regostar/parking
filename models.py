@@ -123,6 +123,7 @@ class ParkedVehicles(Base):
                     parking.vacant = True
                     parking.vehicle_registration_no = ''
                     ParkedVehicles.__s.commit()
+                    ParkedVehicles.__filled -= 1
 
                     # print the reg. no if it existed
 
